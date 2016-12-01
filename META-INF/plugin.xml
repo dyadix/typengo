@@ -1,0 +1,43 @@
+<idea-plugin version="2">
+  <id>codeflections.typengo</id>
+  <name>TypeNGo</name>
+  <version>%VERSION%</version>
+  <idea-version since-build="145.1"/>
+  <vendor email="codeflections@gmail.com " url="http://codeflections.wordpress.com/typengo">Rustam V.</vendor>
+  <depends>com.intellij.modules.platform</depends>
+
+  <description>
+      Replaces shortcuts with mnemonics. The only shortcut to remember is TypeNGo dialog invocation: Ctrl+\.
+      The default shortcut can be changed in Settings|Keymap|Invoke TypeNGo. Abbreviations can be assigned in
+      Settings|Keymap.
+  </description>
+
+  <change-notes><![CDATA[
+  <html>
+      <a href="https://raw.githubusercontent.com/dyadix/codeflections/master/idea/plugins/typengo/changes.log">Change Log</a>
+  </html>
+      ]]>
+  </change-notes>
+
+  <application-components>
+    <!-- Add your application components here -->
+  </application-components>
+
+  <project-components>
+    <!-- Add your project components here -->
+  </project-components>
+
+  <actions>
+      <action id="TypeAndGoInvoke"
+              class="codeflections.typengo.TypeAndGoInvokeAction"
+              text="Invoke TypeNGo"
+              description="Type an abbreviation to invoke an action">
+          <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+          <keyboard-shortcut keymap="$default" first-keystroke="control BACK_SLASH"/>
+      </action>>
+  </actions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
+</idea-plugin>

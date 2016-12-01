@@ -1,0 +1,38 @@
+0.5
+
+- More default commands:
+
+  cle   Close current editor
+  rp    Recent projects
+  ai    Auto-indent Lines
+  xv    Extract (introduce) variable
+  xm    Extract method
+  xc    Extract (introduce) constant
+  ln    Toggle line numbers
+  
+- Fixed sudden focus loss on Linux in popup windows.
+- Customizable command list popup background via Settings|Editor|Colors and Fonts|General|Editor|Notification background.
+- Using console font from current color scheme settings.
+
+0.4
+
+- Fixed a problem with plug-in not enabled on PhpStorm/WebStorm.
+
+- Another way to invoke actions hopefully fixing "Modal actions disappear on invocation #1"
+  (https://github.com/dyadix/codeflections/issues/1)
+
+- '+', '-', '{' and '}' can be used in abbreviations.
+
+- '+' and '-' at the end allow a command to be repeated without closing TypeNGo window. For example, 's+' (the default
+  to expand a selection) you can continue pressing '+' to expand it further.
+
+- More default commands:
+
+  s+    Expand a selection
+  s-    Narrow a selection
+  fn+   Increas font size in editor
+  fn-   Decreas font size in editor
+  m{    Move cursor to the beginning of the block
+  m}    MOve cursor to the end of the block
+  s{    Move cursor to the beginning of the block with selection
+  s}    Move cursor to the end of the block with selection

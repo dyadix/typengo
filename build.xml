@@ -1,0 +1,72 @@
+<project name="TypeNGo" default="all" basedir=".">
+  <property file="build.properties"/>
+  <property name="build" location="build"/>
+  <property name="classes" location="${build}/classes"/>
+  <property name="source" location="src"/>
+  <property name="resources" location="resources"/>
+  <property name="meta-inf" location="META-INF"/>
+  <property name="dist" location="${build}/dist"/>
+  <property name="forms.runtime" location="${idea.home}/redist/forms_rt.jar"/>
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <property file="version-number.properties"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+
+  <target name="all" depends="package"/>
+
+  <path id="classpath.id">
+    <fileset dir="${idea.home}/lib">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
+
+  <target name="compile" depends="register.custom.compilers">
+    <mkdir dir="${classes}"/>
+    <javac2 srcdir="${source}" destdir="${classes}" source="1.8" target="1.8" debug="yes" fork="true" executable="${jdk.home}/bin/javac">
+      <classpath refid="classpath.id"/>
+    </javac2>
+    <unjar src="${forms.runtime}" dest="${classes}">
+      <patternset>
+        <include name="**/core/*.class"/>
+      </patternset>
+    </unjar>
+    <copy todir="${classes}/META-INF">
+      <fileset dir="${meta-inf}"/>
+    </copy>
+    <copy todir="${classes}">
+      <fileset dir="${resources}"/>
+    </copy>
+    <replace file="${classes}/META-INF/plugin.xml" token="%VERSION%" value="${version}"/>
+  </target>
+
+  <target name="make-jar" depends="compile">
+    <jar jarfile="${dist}/lib/typengo.jar">
+      <fileset dir="${classes}">
+        <include name="**/*.class"/>
+        <include name="**/*.xml"/>
+        <include name="**/*.png"/>
+      </fileset>
+    </jar>
+  </target>
+
+  <target name="package" depends="make-jar">
+    <zip destfile="${build}/typengo-plugin-${version}.zip">
+      <zipfileset dir="${dist}" prefix="TypeNGo"/>
+    </zip>
+  </target>
+
+  <target name="clean">
+    <delete dir="${build}"/>
+  </target>
+
+
+</project>
