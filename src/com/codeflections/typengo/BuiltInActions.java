@@ -1,4 +1,4 @@
-package codeflections.typengo;
+package com.codeflections.typengo;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

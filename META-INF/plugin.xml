@@ -1,4 +1,4 @@
-<idea-plugin version="2">
+<idea-plugin>
   <id>codeflections.typengo</id>
   <name>TypeNGo</name>
   <version>%VERSION%</version>
@@ -29,7 +29,7 @@
 
   <actions>
       <action id="TypeAndGoInvoke"
-              class="codeflections.typengo.TypeAndGoInvokeAction"
+              class="com.codeflections.typengo.TypeAndGoInvokeAction"
               text="Invoke TypeNGo"
               description="Type an abbreviation to invoke an action">
           <add-to-group group-id="EditorPopupMenu" anchor="last"/>

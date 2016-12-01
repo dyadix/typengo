@@ -1,4 +1,4 @@
-package codeflections.typengo;
+package com.codeflections.typengo;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import org.jetbrains.annotations.NotNull;
