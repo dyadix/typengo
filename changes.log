@@ -2,7 +2,7 @@
 
 - More default commands:
 
-  cle   Close current editor
+  qc    Close current editor
   rp    Recent projects
   ai    Auto-indent Lines
   xv    Extract (introduce) variable
@@ -13,6 +13,12 @@
 - Fixed sudden focus loss on Linux in popup windows.
 - Customizable command list popup background via Settings|Editor|Colors and Fonts|General|Editor|Notification background.
 - Using console font from current color scheme settings.
+- Changed default commands:
+
+  qa    instead of 'cla',
+  qo    instead of 'clo',
+  qnm   instead of 'clu',
+  qnp   instead of 'clp'
 
 0.4
 

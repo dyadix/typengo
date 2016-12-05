@@ -30,7 +30,7 @@ import java.util.Map;
  * @author dyadix
  */
 public class BuiltInActions {
-    private final static Map<String,ActionInfo> BUILT_IN = new HashMap<String,ActionInfo>();
+    private final static Map<String,ActionInfo> BUILT_IN = new HashMap<>();
 
     static {
         //
@@ -58,11 +58,11 @@ public class BuiltInActions {
         define("dd", "EditorDeleteLine");
         define("su", "SurroundWith");
         define("du", "EditorDuplicateLines");
-        define("clp", "CloseAllUnpinnedEditors");
-        define("clu", "CloseAllUnmodifiedEditors");
-        define("cla", "CloseAllEditors");
-        define("clo", "CloseAllEditorsButActive");
-        define("cle", "CloseEditor");
+        define("qnp", "CloseAllUnpinnedEditors");
+        define("qnm", "CloseAllUnmodifiedEditors");
+        define("qa", "CloseAllEditors");
+        define("qo", "CloseAllEditorsButActive");
+        define("qc", "CloseEditor");
         define("m{", "EditorCodeBlockStart");
         define("m}", "EditorCodeBlockEnd");
         define("s{", "EditorCodeBlockStartWithSelection");
@@ -128,7 +128,7 @@ public class BuiltInActions {
         define("km", "ChangeKeymap");
         define("lf", "ChangeLaf");
         define("vm", "ChangeView");
-        define("clt", "CloseActiveTab");
+        define("qt", "CloseActiveTab");
     }
     
     public static void define(@NotNull String abbreviation, @NotNull String actionId) {
