@@ -72,6 +72,7 @@ public class BuiltInActions {
         define("fn+", "EditorIncreaseFontSize");
         define("fn-", "EditorDecreaseFontSize");
         define("ln", "EditorToggleShowLineNumbers");
+        define("pi", "PinActiveTab");
         //
         // Tool Windows
         //
