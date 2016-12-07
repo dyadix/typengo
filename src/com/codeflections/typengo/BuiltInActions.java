@@ -73,6 +73,10 @@ public class BuiltInActions {
         define("fn-", "EditorDecreaseFontSize");
         define("ln", "EditorToggleShowLineNumbers");
         define("pi", "PinActiveTab");
+        define("c-", "VcsShowPrevChangeMarker");
+        define("c+","VcsShowNextChangeMarker");
+        define("e-","GotoPreviousError");
+        define("e+","GotoNextError");
         //
         // Tool Windows
         //

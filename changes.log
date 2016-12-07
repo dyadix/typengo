@@ -9,6 +9,10 @@
   xm    Extract method
   xc    Extract (introduce) constant
   ln    Toggle line numbers
+  c+    Navigate to next change
+  c-    Navigate to previous change
+  e+    Navigate to next error
+  e-    Navigate to previous error
   
 - Fixed sudden focus loss on Linux in popup windows.
 - Customizable command list popup background via Settings|Editor|Colors and Fonts|General|Editor|Notification background.
