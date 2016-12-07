@@ -1,5 +1,6 @@
 0.5
 
+- Shortcuts are displayed along with abbreviations.
 - More default commands:
 
   qc    Close current editor

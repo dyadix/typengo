@@ -19,12 +19,11 @@
 
 package com.codeflections.typengo;
 
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.Presentation;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.editor.colors.EditorColors;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
+import com.intellij.openapi.keymap.KeymapUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.wm.IdeFrame;
@@ -230,6 +229,14 @@ public class CommandInputForm extends JDialog {
                     if (text != null && !text.isEmpty()) {
                         sb.append(text);
                     }
+                }
+                Shortcut[] shortcuts = action.getShortcutSet().getShortcuts();
+                if (shortcuts.length > 0) {
+                    sb.append(" (<i>");
+                    for (Shortcut shortcut : action.getShortcutSet().getShortcuts()) {
+                        sb.append(KeymapUtil.getShortcutText(shortcut));
+                    }
+                    sb.append("</i>)");
                 }
                 sb.append("</html>");
                 JMenuItem menuItem = new JMenuItem(sb.toString());
