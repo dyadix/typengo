@@ -20,10 +20,10 @@
 - Using console font from current color scheme settings.
 - Changed default commands:
 
-  qa    instead of 'cla',
-  qo    instead of 'clo',
-  qnm   instead of 'clu',
-  qnp   instead of 'clp'
+  qa    (close all editor tabs) instead of 'cla',
+  qo    (close inactive/other editor tabs) instead of 'clo',
+  qnm   (close unmodified editor tabs) instead of 'clu',
+  qnp   (close unpinned editor tabs) instead of 'clp'
 
 0.4
 
