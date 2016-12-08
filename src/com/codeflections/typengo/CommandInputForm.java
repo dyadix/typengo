@@ -234,6 +234,9 @@ public class CommandInputForm extends JDialog {
                 if (shortcuts.length > 0) {
                     sb.append(" (<i>");
                     for (Shortcut shortcut : action.getShortcutSet().getShortcuts()) {
+                        if (shortcut != shortcuts[0]) {
+                            sb.append(", ");
+                        }
                         sb.append(KeymapUtil.getShortcutText(shortcut));
                     }
                     sb.append("</i>)");
