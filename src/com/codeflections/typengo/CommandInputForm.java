@@ -19,7 +19,10 @@
 
 package com.codeflections.typengo;
 
-import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.Presentation;
+import com.intellij.openapi.actionSystem.Shortcut;
 import com.intellij.openapi.editor.colors.EditorColors;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
@@ -29,6 +32,8 @@ import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.wm.IdeFrame;
 import com.intellij.openapi.wm.WindowManager;
 import com.intellij.openapi.wm.ex.WindowManagerEx;
+import com.intellij.ui.ColorUtil;
+import com.intellij.ui.GuiUtils;
 import com.intellij.ui.JBColor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -203,8 +208,12 @@ public class CommandInputForm extends JDialog {
     private void updatePopup(@NotNull JPopupMenu popupMenu, @NotNull String typedStr) {
         popupMenu.removeAll();
         Collection<ActionInfo> foundActions = ActionFinder.findActions(typedStr);
-        Color backgroundColor = 
-                EditorColorsManager.getInstance().getGlobalScheme().getColor(EditorColors.NOTIFICATION_BACKGROUND);
+        EditorColorsScheme currScheme = EditorColorsManager.getInstance().getGlobalScheme();
+        Color backgroundColor = currScheme.getColor(EditorColors.NOTIFICATION_BACKGROUND);
+        Color foregroundColor = currScheme.getDefaultForeground();
+        if (backgroundColor == null) backgroundColor = currScheme.getDefaultBackground();
+        Color shortcutColor = getShortcutColor(backgroundColor, foregroundColor);
+        String shortcutStyle = "color:#" + GuiUtils.colorToHex(shortcutColor);
         for (ActionInfo actionInfo: foundActions) {
             AnAction action = actionInfo.getAction();
             if (action != null) {
@@ -222,21 +231,27 @@ public class CommandInputForm extends JDialog {
                 }
                 Shortcut[] shortcuts = action.getShortcutSet().getShortcuts();
                 if (shortcuts.length > 0) {
-                    sb.append(" (<i>");
+                    sb.append(", <i style='").append(shortcutStyle).append("'>");
                     for (Shortcut shortcut : action.getShortcutSet().getShortcuts()) {
                         if (shortcut != shortcuts[0]) {
                             sb.append(", ");
                         }
                         sb.append(KeymapUtil.getShortcutText(shortcut));
                     }
-                    sb.append("</i>)");
+                    sb.append("</i>");
                 }
                 sb.append("</html>");
                 JMenuItem menuItem = new JMenuItem(sb.toString());
+                menuItem.setForeground(foregroundColor);
                 menuItem.setBackground(backgroundColor);
                 popupMenu.add(menuItem);
             }
         }
+    }
+
+    @SuppressWarnings("UseJBColor")
+    private Color getShortcutColor(@NotNull Color background, @NotNull Color foreground) {
+        return ColorUtil.mix(background, foreground, 0.5);
     }
 
     private void centerOnIdeFrameOrScreen(@NotNull AnActionEvent actionEvent) {
