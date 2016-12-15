@@ -29,6 +29,7 @@ import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.keymap.KeymapUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.wm.IdeFrame;
 import com.intellij.openapi.wm.WindowManager;
 import com.intellij.openapi.wm.ex.WindowManagerEx;
@@ -48,6 +49,8 @@ import java.util.Collection;
  * @author dyadix
  */
 public class CommandInputForm extends JDialog {
+
+    public static final int ABBR_FIELD_SIZE = 5;
 
     private JPanel topPanel;
     private JTextField commandField;
@@ -214,12 +217,16 @@ public class CommandInputForm extends JDialog {
         if (backgroundColor == null) backgroundColor = currScheme.getDefaultBackground();
         Color shortcutColor = getShortcutColor(backgroundColor, foregroundColor);
         String shortcutStyle = "color:#" + GuiUtils.colorToHex(shortcutColor);
+        String abbrStyle = "font-family:" + currScheme.getConsoleFontName() + ";font-style:oblique;";
         for (ActionInfo actionInfo: foundActions) {
             AnAction action = actionInfo.getAction();
             if (action != null) {
                 Presentation presentation = actionInfo.getAction().getTemplatePresentation();
                 StringBuilder sb = new StringBuilder();
-                sb.append("<html><b>").append(actionInfo.getAbbreviation()).append("</b>&nbsp;&nbsp;");
+                sb
+                        .append("<html><span style='").append(abbrStyle).append("'>")
+                        .append(fillString(actionInfo.getAbbreviation(), ABBR_FIELD_SIZE))
+                        .append("</span>");
                 String desc = presentation.getDescription();
                 if (desc != null && !desc.isEmpty()) {
                     sb.append(desc);
@@ -231,7 +238,7 @@ public class CommandInputForm extends JDialog {
                 }
                 Shortcut[] shortcuts = action.getShortcutSet().getShortcuts();
                 if (shortcuts.length > 0) {
-                    sb.append(", <i style='").append(shortcutStyle).append("'>");
+                    sb.append("&nbsp;&nbsp;<i style='").append(shortcutStyle).append("'>");
                     for (Shortcut shortcut : action.getShortcutSet().getShortcuts()) {
                         if (shortcut != shortcuts[0]) {
                             sb.append(", ");
@@ -247,6 +254,10 @@ public class CommandInputForm extends JDialog {
                 popupMenu.add(menuItem);
             }
         }
+    }
+
+    private String fillString(@NotNull String str, int size) {
+        return str.length() < size ? str + StringUtil.repeat("&nbsp;", size - str.length()) : str;
     }
 
     @SuppressWarnings("UseJBColor")
