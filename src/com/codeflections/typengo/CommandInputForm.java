@@ -34,15 +34,16 @@ import com.intellij.openapi.wm.IdeFrame;
 import com.intellij.openapi.wm.WindowManager;
 import com.intellij.openapi.wm.ex.WindowManagerEx;
 import com.intellij.ui.ColorUtil;
+import com.intellij.ui.DocumentAdapter;
 import com.intellij.ui.GuiUtils;
 import com.intellij.ui.JBColor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.Collection;
 
 /**
@@ -89,61 +90,40 @@ public class CommandInputForm extends JDialog {
             currTyped = null;
             focusOnIdeFrame(ideFrame);
         }, escKeyStroke, JComponent.WHEN_FOCUSED);
-        commandField.addKeyListener(new KeyListener() {
+        commandField.getDocument().addDocumentListener(new DocumentAdapter() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                char c = e.getKeyChar();
-                AnAction action = null;
-                boolean isCommandTyped = false;
-                if (Character.isLetter(c) ||
-                    c == '-' ||
-                    c == '+' ||
-                    c == '{' ||
-                    c == '}' ||
-                    Character.isDigit(c)
-                    ) {
-                    currTyped = commandField.getText();
-                    if (currTyped != null) {
-                        currTyped += c;
-                        ActionInfo actionInfo = ActionFinder.findAction(getActionId(currTyped));
-                        action = actionInfo != null ? actionInfo.getAction() : null;
-                    }
-                    isCommandTyped = true;
-                } else {
-                    popupMenu.setVisible(false);
-                }
-                if (action != null) {
-                    if (!(currTyped.endsWith("+") || currTyped.endsWith("-"))) {
-                        popupMenu.setVisible(false);
-                        CommandInputForm.this.setVisible(false);
-                        CommandInputForm.this.dispose();
-                        currTyped = null;
-                    }
-                    invokeAction(action);
-                } else {
-                    if (isCommandTyped && currTyped != null) {
-                        popupMenu.setVisible(false);
-                        updatePopup(popupMenu, currTyped);
-                        Point location = commandField.getLocationOnScreen();
-                        location = new Point(location.x, location.y + commandField.getHeight());
-                        popupMenu.setLocation(location);
-                        popupMenu.setVisible(true);
-                    } else {
-                        popupMenu.setVisible(false);
-                    }
-                }
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-
+            protected void textChanged(DocumentEvent documentEvent) {
+                onTextChange();
             }
         });
+    }
+
+
+    private void onTextChange() {
+        String lastTyped = currTyped;
+        currTyped = commandField.getText();
+        if (!StringUtil.isEmpty(currTyped)) {
+            ActionInfo actionInfo = ActionFinder.findAction(getActionId(currTyped, lastTyped));
+            AnAction action = actionInfo != null ? actionInfo.getAction() : null;
+            if (action != null) {
+                if (!currTyped.endsWith("+") && !currTyped.endsWith("-")) {
+                    popupMenu.setVisible(false);
+                    CommandInputForm.this.setVisible(false);
+                    CommandInputForm.this.dispose();
+                }
+                invokeAction(action);
+            } else {
+                popupMenu.setVisible(false);
+                updatePopup(popupMenu, currTyped);
+                Point location = commandField.getLocationOnScreen();
+                location = new Point(location.x, location.y + commandField.getHeight());
+                popupMenu.setLocation(location);
+                popupMenu.setVisible(true);
+            }
+        }
+        else {
+            popupMenu.setVisible(false);
+        }
     }
 
     private void invokeAction(final AnAction action) {
@@ -175,14 +155,20 @@ public class CommandInputForm extends JDialog {
     }
 
     @NotNull
-    private String getActionId(@NotNull String typed) {
+    private String getActionId(@NotNull String typed, @Nullable String lastTyped) {
         if (typed.length() > 0) {
             char lastChar = typed.charAt(typed.length() - 1);
-            switch (lastChar) {
-                case '+':
-                    return stripRepeatingTrailingChar(typed, '+');
-                case '-':
-                    return stripRepeatingTrailingChar(typed, '-');
+            if (lastChar == '+' || lastChar == '-') {
+                if (lastTyped != null && lastTyped.startsWith(typed)) {
+                    String stripped = stripRepeatingTrailingChar(typed, lastChar);
+                    if (stripped.length() > 0) {
+                        stripped = stripped.substring(0, stripped.length() - 1);
+                    }
+                    return stripped + (lastChar == '+' ? '-' : '+');
+                }
+                else {
+                    return stripRepeatingTrailingChar(typed, lastChar);
+                }
             }
         }
         return typed;
