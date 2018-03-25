@@ -40,6 +40,8 @@ public class BuiltInActions {
         define("ss", "ShowSettings");
         define("rf", "RecentFiles");
         define("rp", "ManageRecentProjects");
+        define("fs", "ToggleFullScreen");
+        define("st", "FileStructurePopup");
         //
         // Navigation
         //
@@ -77,12 +79,15 @@ public class BuiltInActions {
         define("c+","VcsShowNextChangeMarker");
         define("e-","GotoPreviousError");
         define("e+","GotoNextError");
+        define("sl", "EditorSelectLine");
+        define("ph", "ToggleInlineHintsAction");
         //
         // Tool Windows
         //
         define("te", "ActivateTerminalToolWindow");
         define("pr", "ActivateProjectToolWindow");
         define("vc", "ActivateChangesToolWindow");
+        define("tt", "HideAllWindows");
         //
         // Find
         //
@@ -109,6 +114,7 @@ public class BuiltInActions {
         define("cp", "Vcs.CherryPick");
         define("an", "Annotate");
         define("lh", "LocalHistory.ShowHistory");
+        define("br", "GitBranches");
         //
         // Format
         //

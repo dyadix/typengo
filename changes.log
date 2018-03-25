@@ -3,6 +3,15 @@
 - Some styling for abbreviations list.
 - Digits can be used in abbreviations.
 - Up/Down keys repeat the latest command ending with +/-.
+- More default commands:
+
+  fs    Toggle full screen mode
+  st    Show file structure popup
+  sl    Select current line
+  ph    Toggle parameter hints
+  tt    Toggle all tool windows
+  br    Show Git branches
+
 
 0.5
 
