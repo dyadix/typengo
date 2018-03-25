@@ -33,7 +33,7 @@
   <property name="resources" location="resources"/>
   <property name="meta-inf" location="META-INF"/>
   <property name="dist" location="${build}/dist"/>
-  <property name="forms.runtime" location="${idea.home}/redist/forms_rt.jar"/>
+  <property name="forms.runtime" location="${idea.home}/lib/forms_rt.jar"/>
   <property name="javac2.home" value="${idea.home}/lib"/>
   <property file="version-number.properties"/>
   <path id="javac2.classpath">
