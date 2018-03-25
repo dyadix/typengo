@@ -2,7 +2,7 @@
 
 - Some styling for abbreviations list.
 - Digits can be used in abbreviations.
-- Removing + or - at the end is equivalent to typing - or + respectively.
+- Up/Down keys repeat the latest command ending with +/-.
 
 0.5
 
