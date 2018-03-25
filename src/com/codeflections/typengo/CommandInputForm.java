@@ -57,7 +57,6 @@ public class CommandInputForm extends JDialog {
     private JTextField commandField;
     private final Component sourceComponent;
     private AnActionEvent originalEvent;
-    private String currTyped;
     private final JPopupMenu popupMenu;
     private final JFrame ideFrame;
 
@@ -79,34 +78,47 @@ public class CommandInputForm extends JDialog {
         topPanel.setBorder(BorderFactory.createLineBorder(JBColor.gray));
         this.setAlwaysOnTop(true);
         commandField.setRequestFocusEnabled(true);
-        commandField.addActionListener(e -> {
-
-        });
         KeyStroke escKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
         commandField.registerKeyboardAction(e -> {
             popupMenu.setVisible(false);
             CommandInputForm.this.setVisible(false);
             CommandInputForm.this.dispose();
-            currTyped = null;
             focusOnIdeFrame(ideFrame);
         }, escKeyStroke, JComponent.WHEN_FOCUSED);
+
+        KeyStroke downKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, false);
+        commandField.registerKeyboardAction(e -> {
+            String commandString = commandField.getText();
+            if (StringUtil.endsWith(commandString, "-")) {
+                commandString = commandString.substring(0, commandString.length() - 1) + "+";
+            }
+            handleCommand(commandString);
+        }, downKeyStroke, JComponent.WHEN_FOCUSED);
+
+        KeyStroke upKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, false);
+        commandField.registerKeyboardAction(e -> {
+            String commandString = commandField.getText();
+            if (StringUtil.endsWith(commandString, "+")) {
+                commandString = commandString.substring(0, commandString.length() - 1) + "-";
+            }
+            handleCommand(commandString);
+        }, upKeyStroke, JComponent.WHEN_FOCUSED);
+
         commandField.getDocument().addDocumentListener(new DocumentAdapter() {
             @Override
             protected void textChanged(DocumentEvent documentEvent) {
-                onTextChange();
+                handleCommand(commandField.getText());
             }
         });
     }
 
 
-    private void onTextChange() {
-        String lastTyped = currTyped;
-        currTyped = commandField.getText();
-        if (!StringUtil.isEmpty(currTyped)) {
-            ActionInfo actionInfo = ActionFinder.findAction(getActionId(currTyped, lastTyped));
+    private void handleCommand(@NotNull String commandString) {
+        if (!StringUtil.isEmpty(commandString)) {
+            ActionInfo actionInfo = ActionFinder.findAction(commandString);
             AnAction action = actionInfo != null ? actionInfo.getAction() : null;
             if (action != null) {
-                if (!currTyped.endsWith("+") && !currTyped.endsWith("-")) {
+                if (!commandString.endsWith("+") && !commandString.endsWith("-")) {
                     popupMenu.setVisible(false);
                     CommandInputForm.this.setVisible(false);
                     CommandInputForm.this.dispose();
@@ -114,7 +126,7 @@ public class CommandInputForm extends JDialog {
                 invokeAction(action);
             } else {
                 popupMenu.setVisible(false);
-                updatePopup(popupMenu, currTyped);
+                updatePopup(popupMenu, commandString);
                 Point location = commandField.getLocationOnScreen();
                 location = new Point(location.x, location.y + commandField.getHeight());
                 popupMenu.setLocation(location);
@@ -152,34 +164,6 @@ public class CommandInputForm extends JDialog {
                 // Ignore
             }
         }
-    }
-
-    @NotNull
-    private String getActionId(@NotNull String typed, @Nullable String lastTyped) {
-        if (typed.length() > 0) {
-            char lastChar = typed.charAt(typed.length() - 1);
-            if (lastChar == '+' || lastChar == '-') {
-                if (lastTyped != null && lastTyped.startsWith(typed)) {
-                    String stripped = stripRepeatingTrailingChar(typed, lastChar);
-                    if (stripped.length() > 0) {
-                        stripped = stripped.substring(0, stripped.length() - 1);
-                    }
-                    return stripped + (lastChar == '+' ? '-' : '+');
-                }
-                else {
-                    return stripRepeatingTrailingChar(typed, lastChar);
-                }
-            }
-        }
-        return typed;
-    }
-
-    @NotNull
-    private String stripRepeatingTrailingChar(@NotNull String typed, char c) {
-        int index = typed.length() - 1;
-        while (index >= 0 && typed.charAt(index) == c) index --;
-        index ++;
-        return typed.substring(0, index + 1);
     }
 
     static void show(Component sourceComponent, AnActionEvent originalEvent) {
@@ -248,6 +232,7 @@ public class CommandInputForm extends JDialog {
         }
     }
 
+    @SuppressWarnings("SameParameterValue")
     private String fillString(@NotNull String str, int size) {
         return str.length() < size ? str + StringUtil.repeat("&nbsp;", size - str.length()) : str;
     }
