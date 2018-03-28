@@ -127,15 +127,17 @@ public class CommandInputForm extends JDialog {
             } else {
                 popupMenu.setVisible(false);
                 updatePopup(popupMenu, commandString);
-                Point location = commandField.getLocationOnScreen();
-                location = new Point(location.x, location.y + commandField.getHeight());
-                popupMenu.setLocation(location);
-                popupMenu.setVisible(true);
+                showPopup();
             }
         }
         else {
             popupMenu.setVisible(false);
         }
+    }
+
+    private void showPopup() {
+        popupMenu.show(this.commandField, 0, this.commandField.getHeight());
+        this.commandField.requestFocus();
     }
 
     private void invokeAction(final AnAction action) {
