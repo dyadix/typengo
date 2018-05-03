@@ -39,8 +39,8 @@ public class BuiltInActions {
         //
         define("ps", "ShowProjectStructureSettings");
         define("ss", "ShowSettings");
-        define("rf", "RecentFiles");
-        define("rp", "ManageRecentProjects");
+        define("rf", "RecentFiles", true);
+        define("rp", "ManageRecentProjects", true);
         define("fs", "ToggleFullScreen");
         define("st", "FileStructurePopup", true);
         //
@@ -95,7 +95,7 @@ public class BuiltInActions {
         define("fu", "FindUsages");
         define("fp", "FindInPath");
         define("fa", "GotoAction");
-        define("se", "SearchEverywhere");
+        define("se", "SearchEverywhere", true);
         //
         // Run/Debug
         //
