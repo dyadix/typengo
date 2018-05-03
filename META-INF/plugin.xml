@@ -2,7 +2,7 @@
   <id>codeflections.typengo</id>
   <name>TypeNGo</name>
   <version>%VERSION%</version>
-  <idea-version since-build="163.1"/>
+  <idea-version since-build="182.1"/>
   <vendor email="dev@codeflections.com" url="http://codeflections.com/typengo">Rustam V.</vendor>
   <depends>com.intellij.modules.platform</depends>
 

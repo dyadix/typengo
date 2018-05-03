@@ -36,7 +36,8 @@ public class ActionFinder {
         List<String> abbrActionIds = AbbreviationManager.getInstance().findActions(abbreviation);
         if (abbrActionIds.size() == 1) {
             actionId = abbrActionIds.get(0);
-            return new ActionInfo(abbreviation, actionId);
+            ActionInfo builtInInfo = BuiltInActions.getActionInfoById(actionId);
+            return builtInInfo != null ? builtInInfo : new ActionInfo(abbreviation, actionId);
         }
         else if (abbrActionIds.size() == 0) {
             return BuiltInActions.getActionInfo(abbreviation);
@@ -47,7 +48,7 @@ public class ActionFinder {
 
     public static Collection<ActionInfo> findActions(String typedStr) {
         Set<String> abbreviations = AbbreviationManager.getInstance().getAbbreviations();
-        Map<String,ActionInfo> foundActions = new TreeMap<String,ActionInfo>();
+        Map<String,ActionInfo> foundActions = new TreeMap<>();
         for (String abbr : abbreviations) {
             if (abbr.startsWith(typedStr)) {
                 ActionInfo found = findAction(abbr);

@@ -31,6 +31,7 @@ import java.util.Map;
  */
 public class BuiltInActions {
     private final static Map<String,ActionInfo> BUILT_IN = new HashMap<>();
+    private final static Map<String,ActionInfo> ACTIONS_BY_ID = new HashMap<>(); 
 
     static {
         //
@@ -41,24 +42,24 @@ public class BuiltInActions {
         define("rf", "RecentFiles");
         define("rp", "ManageRecentProjects");
         define("fs", "ToggleFullScreen");
-        define("st", "FileStructurePopup");
+        define("st", "FileStructurePopup", true);
         //
         // Navigation
         //
         define("gr", "GotoRelated");
         define("gb", "GotoSuperMethod");
         define("gt", "GotoTypeDeclaration");
-        define("gc", "GotoClass");
+        define("gc", "GotoClass", true);
         define("gd", "GotoDeclaration");
-        define("gf", "GotoFile");
-        define("gs", "GotoSymbol");
-        define("gl", "GotoLine");
+        define("gf", "GotoFile", true);
+        define("gs", "GotoSymbol", true);
+        define("gl", "GotoLine", true);
         define("gi", "GotoImplementation");
         //
         // Editor
         //
         define("dd", "EditorDeleteLine");
-        define("su", "SurroundWith");
+        define("su", "SurroundWith", true);
         define("du", "EditorDuplicateLines");
         define("qnp", "CloseAllUnpinnedEditors");
         define("qnm", "CloseAllUnmodifiedEditors");
@@ -143,7 +144,18 @@ public class BuiltInActions {
     }
     
     public static void define(@NotNull String abbreviation, @NotNull String actionId) {
-        BUILT_IN.put(abbreviation, new ActionInfo(abbreviation, actionId));
+        define(abbreviation, actionId, false);
+    }
+
+    public static void define(@NotNull String abbreviation, @NotNull String actionId, boolean hasPopup) {
+        final ActionInfo actionInfo = new ActionInfo(abbreviation, actionId, hasPopup);
+        BUILT_IN.put(abbreviation, actionInfo);
+        ACTIONS_BY_ID.put(actionId, actionInfo);
+    }
+
+    @Nullable
+    public static ActionInfo getActionInfoById(@NotNull String actionId) {
+        return ACTIONS_BY_ID.get(actionId);
     }
 
     @Nullable

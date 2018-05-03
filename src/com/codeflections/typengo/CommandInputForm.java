@@ -123,7 +123,7 @@ public class CommandInputForm extends JDialog {
                     CommandInputForm.this.setVisible(false);
                     CommandInputForm.this.dispose();
                 }
-                invokeAction(action);
+                invokeAction(action, !actionInfo.hasPopup());
             } else {
                 popupMenu.setVisible(false);
                 updatePopup(popupMenu, commandString);
@@ -140,9 +140,9 @@ public class CommandInputForm extends JDialog {
         this.commandField.requestFocus();
     }
 
-    private void invokeAction(final AnAction action) {
+    private void invokeAction(final AnAction action, boolean ideFocus) {
         if (action != null && sourceComponent != null) {
-            focusOnIdeFrame(ideFrame);
+            if (ideFocus) focusOnIdeFrame(ideFrame);
             ActionRunnerFactory.createActionRunner(action).runAction(sourceComponent, originalEvent);
         }
     }
@@ -159,11 +159,6 @@ public class CommandInputForm extends JDialog {
             }
             if (sourceComponent != null) {
                 sourceComponent.requestFocusInWindow();
-            }
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                // Ignore
             }
         }
     }

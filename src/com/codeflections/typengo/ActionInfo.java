@@ -32,10 +32,16 @@ import org.jetbrains.annotations.Nullable;
 public class ActionInfo {
     private final @NotNull String abbreviation;
     private @NotNull String actionId;
+    private boolean hasPopup;
 
     public ActionInfo(@NotNull String abbreviation, @NotNull String actionId) {
+        this(abbreviation, actionId, false);
+    }
+
+    public ActionInfo(@NotNull String abbreviation, @NotNull String actionId, boolean hasPopup) {
         this.abbreviation = abbreviation;
         this.actionId = actionId;
+        this.hasPopup = hasPopup;
     }
 
     @Nullable
@@ -51,5 +57,9 @@ public class ActionInfo {
     @NotNull
     public String getActionId() {
         return actionId;
+    }
+
+    public boolean hasPopup() {
+        return this.hasPopup;
     }
 }
