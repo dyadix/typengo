@@ -115,7 +115,7 @@ public class BuiltInActions {
         define("cp", "Vcs.CherryPick");
         define("an", "Annotate");
         define("lh", "LocalHistory.ShowHistory");
-        define("br", "GitBranches");
+        define("br", "GitBranches", true);
         //
         // Format
         //
