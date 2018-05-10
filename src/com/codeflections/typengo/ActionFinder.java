@@ -20,6 +20,7 @@
 package com.codeflections.typengo;
 
 import com.intellij.openapi.actionSystem.AbbreviationManager;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -33,7 +34,7 @@ public class ActionFinder {
     @Nullable
     public static ActionInfo findAction(String abbreviation) {
         String actionId;
-        List<String> abbrActionIds = AbbreviationManager.getInstance().findActions(abbreviation);
+        List<String> abbrActionIds = tryFindWithSuffix(abbreviation);
         if (abbrActionIds.size() == 1) {
             actionId = abbrActionIds.get(0);
             ActionInfo builtInInfo = BuiltInActions.getActionInfoById(actionId);
@@ -43,6 +44,15 @@ public class ActionFinder {
             return BuiltInActions.getActionInfo(abbreviation);
         }
         return null;
+    }
+
+    private static List<String> tryFindWithSuffix(@NotNull String abbreviation) {
+        final AbbreviationManager abbreviationManager = AbbreviationManager.getInstance();
+        List<String> abbrActionIds = abbreviationManager.findActions(abbreviation);
+        if (abbrActionIds.isEmpty()) {
+            return abbreviationManager.findActions(abbreviation + ActionInfo.POPUP_SUFFIX);
+        }
+        return abbrActionIds;
     }
 
 
