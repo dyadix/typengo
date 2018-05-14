@@ -22,6 +22,8 @@ package com.codeflections.typengo;
 import com.intellij.ide.actions.GotoActionAction;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.wm.IdeFocusManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -36,6 +38,8 @@ public class GotoActionRunner extends DefaultActionRunner {
 
     @Override
     public void runAction(@NotNull Component sourceComponent, @NotNull AnActionEvent originalEvent) {
-        GotoActionAction.performAction(action, sourceComponent, originalEvent);
+        ApplicationManager.getApplication().invokeLater(
+            () -> IdeFocusManager.getGlobalInstance().doWhenFocusSettlesDown(
+                () -> GotoActionAction.performAction(action, sourceComponent, originalEvent)));
     }
 }
