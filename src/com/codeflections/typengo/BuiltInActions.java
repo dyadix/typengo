@@ -100,11 +100,11 @@ public class BuiltInActions {
         // Run/Debug
         //
         define("de", "DebugClass");
-        define("dc", "ChooseDebugConfiguration");
+        define("dc", "ChooseDebugConfiguration", true);
         define("ds", "Debug");
         define("rs", "Run");
         define("ru", "RunClass");
-        define("rc", "ChooseRunConfiguration");
+        define("rc", "ChooseRunConfiguration", true);
         //
         // Version control
         //
