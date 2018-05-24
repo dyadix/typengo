@@ -39,27 +39,27 @@ public class BuiltInActions {
         //
         define("ps", "ShowProjectStructureSettings");
         define("ss", "ShowSettings");
-        define("rf", "RecentFiles", true);
-        define("rp", "ManageRecentProjects", true);
+        define("rf", "RecentFiles");
+        define("rp", "ManageRecentProjects");
         define("fs", "ToggleFullScreen");
-        define("st", "FileStructurePopup", true);
+        define("st", "FileStructurePopup");
         //
         // Navigation
         //
         define("gr", "GotoRelated");
         define("gb", "GotoSuperMethod");
         define("gt", "GotoTypeDeclaration");
-        define("gc", "GotoClass", true);
+        define("gc", "GotoClass");
         define("gd", "GotoDeclaration");
-        define("gf", "GotoFile", true);
-        define("gs", "GotoSymbol", true);
-        define("gl", "GotoLine", true);
+        define("gf", "GotoFile");
+        define("gs", "GotoSymbol");
+        define("gl", "GotoLine");
         define("gi", "GotoImplementation");
         //
         // Editor
         //
         define("dd", "EditorDeleteLine");
-        define("su", "SurroundWith", true);
+        define("su", "SurroundWith");
         define("du", "EditorDuplicateLines");
         define("qnp", "CloseAllUnpinnedEditors");
         define("qnm", "CloseAllUnmodifiedEditors");
@@ -95,16 +95,16 @@ public class BuiltInActions {
         define("fu", "FindUsages");
         define("fp", "FindInPath");
         define("fa", "GotoAction");
-        define("se", "SearchEverywhere", true);
+        define("se", "SearchEverywhere");
         //
         // Run/Debug
         //
         define("de", "DebugClass");
-        define("dc", "ChooseDebugConfiguration", true);
+        define("dc", "ChooseDebugConfiguration");
         define("ds", "Debug");
         define("rs", "Run");
         define("ru", "RunClass");
-        define("rc", "ChooseRunConfiguration", true);
+        define("rc", "ChooseRunConfiguration");
         //
         // Version control
         //
@@ -115,7 +115,7 @@ public class BuiltInActions {
         define("cp", "Vcs.CherryPick");
         define("an", "Annotate");
         define("lh", "LocalHistory.ShowHistory");
-        define("br", "GitBranches", true);
+        define("br", "GitBranches");
         //
         // Format
         //
@@ -142,13 +142,9 @@ public class BuiltInActions {
         define("vm", "ChangeView");
         define("qt", "CloseActiveTab");
     }
-    
-    public static void define(@NotNull String abbreviation, @NotNull String actionId) {
-        define(abbreviation, actionId, false);
-    }
 
-    public static void define(@NotNull String abbreviation, @NotNull String actionId, boolean hasPopup) {
-        final ActionInfo actionInfo = new ActionInfo(abbreviation, actionId, hasPopup);
+    public static void define(@NotNull String abbreviation, @NotNull String actionId) {
+        final ActionInfo actionInfo = new ActionInfo(abbreviation, actionId);
         BUILT_IN.put(abbreviation, actionInfo);
         ACTIONS_BY_ID.put(actionId, actionInfo);
     }

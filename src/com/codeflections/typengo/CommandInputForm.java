@@ -52,6 +52,7 @@ import java.util.Collection;
 public class CommandInputForm extends JDialog {
 
     public static final int ABBR_FIELD_SIZE = 5;
+    public static final int ACTION_INVOKE_DELAY = 100;
 
     private JPanel topPanel;
     private JTextField commandField;
@@ -123,7 +124,7 @@ public class CommandInputForm extends JDialog {
                     CommandInputForm.this.setVisible(false);
                     CommandInputForm.this.dispose();
                 }
-                invokeAction(action, !actionInfo.hasPopup());
+                invokeAction(action);
             } else {
                 popupMenu.setVisible(false);
                 updatePopup(popupMenu, commandString);
@@ -140,10 +141,18 @@ public class CommandInputForm extends JDialog {
         this.commandField.requestFocus();
     }
 
-    private void invokeAction(final AnAction action, boolean ideFocus) {
+    private void invokeAction(final AnAction action) {
         if (action != null && sourceComponent != null) {
-            if (ideFocus) focusOnIdeFrame(ideFrame);
-            ActionRunnerFactory.createActionRunner(action).runAction(sourceComponent, originalEvent);
+            focusOnIdeFrame(ideFrame);
+            Thread invocationThread = new Thread(() -> {
+                try {
+                    Thread.sleep(ACTION_INVOKE_DELAY);
+                } catch (InterruptedException e) {
+                    // Ignore
+                }
+                ActionRunnerFactory.createActionRunner(action).runAction(sourceComponent, originalEvent);
+            });
+            invocationThread.start();
         }
     }
 

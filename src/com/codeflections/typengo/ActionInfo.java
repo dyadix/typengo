@@ -21,7 +21,6 @@ package com.codeflections.typengo;
 
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -31,27 +30,13 @@ import org.jetbrains.annotations.Nullable;
  * @author dyadix
  */
 public class ActionInfo {
-    public static final String POPUP_SUFFIX = "!";
     private final @NotNull String abbreviation;
     private @NotNull String actionId;
-    private boolean hasPopup;
+
 
     public ActionInfo(@NotNull String abbreviation, @NotNull String actionId) {
-        this(abbreviation, actionId, false);
-    }
-
-    public ActionInfo(@NotNull String abbreviation, @NotNull String actionId, boolean hasPopup) {
-        Pair<String,Boolean> abbrData = parseAbbreviation(abbreviation);
-        this.abbreviation = abbrData.first;
+        this.abbreviation = abbreviation;
         this.actionId = actionId;
-        this.hasPopup = hasPopup || abbrData.second;
-    }
-
-    private Pair<String, Boolean> parseAbbreviation(@NotNull String abbreviation) {
-        if (abbreviation.endsWith(POPUP_SUFFIX)) {
-            return Pair.create(abbreviation.substring(0, abbreviation.length() - POPUP_SUFFIX.length()), true);
-        }
-        return Pair.create(abbreviation, false);
     }
 
     @Nullable
@@ -64,7 +49,4 @@ public class ActionInfo {
         return abbreviation;
     }
 
-    public boolean hasPopup() {
-        return this.hasPopup;
-    }
 }
