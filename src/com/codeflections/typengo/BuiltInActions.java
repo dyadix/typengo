@@ -55,6 +55,8 @@ public class BuiltInActions {
         define("gs", "GotoSymbol");
         define("gl", "GotoLine");
         define("gi", "GotoImplementation");
+        define("g-", "Back");
+        define("g+", "Forward");
         //
         // Editor
         //
@@ -115,7 +117,7 @@ public class BuiltInActions {
         define("cp", "Vcs.CherryPick");
         define("an", "Annotate");
         define("lh", "LocalHistory.ShowHistory");
-        define("br", "GitBranches");
+        define("br", "Git.Branches");
         //
         // Format
         //
@@ -128,6 +130,7 @@ public class BuiltInActions {
         define("xv", "IntroduceVariable");
         define("xm", "ExtractMethod");
         define("xc", "IntroduceConstant");
+        define("xf", "IntroduceField");
         //
         // Compilation
         //
@@ -141,6 +144,7 @@ public class BuiltInActions {
         define("lf", "ChangeLaf");
         define("vm", "ChangeView");
         define("qt", "CloseActiveTab");
+        define("dt", "ShowDiscoveredTests");
     }
 
     public static void define(@NotNull String abbreviation, @NotNull String actionId) {

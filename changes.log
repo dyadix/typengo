@@ -11,7 +11,10 @@
   ph    Toggle parameter hints
   tt    Toggle all tool windows
   br    Show Git branches
-
+  xf    Extract (introduce) field
+  dt    Discover tests
+  g-    Go back
+  g+    Go forward
 
 0.5
 
