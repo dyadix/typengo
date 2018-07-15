@@ -48,11 +48,7 @@ public class ActionFinder {
 
     private static List<String> tryFindWithSuffix(@NotNull String abbreviation) {
         final AbbreviationManager abbreviationManager = AbbreviationManager.getInstance();
-        List<String> abbrActionIds = abbreviationManager.findActions(abbreviation);
-        if (abbrActionIds.isEmpty()) {
-            return abbreviationManager.findActions(abbreviation + ActionInfo.POPUP_SUFFIX);
-        }
-        return abbrActionIds;
+        return abbreviationManager.findActions(abbreviation);
     }
 
 
