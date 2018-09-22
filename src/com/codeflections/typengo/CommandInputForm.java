@@ -28,6 +28,7 @@ import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.keymap.KeymapUtil;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.wm.IdeFrame;
@@ -56,6 +57,7 @@ public class CommandInputForm extends JDialog {
 
     private JPanel topPanel;
     private JTextField commandField;
+    private JLabel promptField;
     private final Component sourceComponent;
     private AnActionEvent originalEvent;
     private final JPopupMenu popupMenu;
@@ -70,6 +72,8 @@ public class CommandInputForm extends JDialog {
         this.sourceComponent = sourceComponent;
         this.originalEvent = originalEvent;
         this.add(topPanel);
+        Icon icon = IconLoader.getIcon("/icons/typengo.svg");
+        promptField.setIcon(icon);
         EditorColorsScheme scheme = EditorColorsManager.getInstance().getGlobalScheme();
         Font commandFont = new Font(scheme.getConsoleFontName(), Font.PLAIN, scheme.getConsoleFontSize());
         commandField.setFont(commandFont);

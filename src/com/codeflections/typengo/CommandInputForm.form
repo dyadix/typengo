@@ -21,12 +21,11 @@
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
-      <component id="4f84" class="javax.swing.JLabel">
+      <component id="4f84" class="javax.swing.JLabel" binding="promptField">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="1" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <icon value="icons/typengo.png"/>
           <text value=""/>
         </properties>
       </component>
