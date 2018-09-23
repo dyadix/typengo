@@ -81,6 +81,7 @@
         <include name="**/*.class"/>
         <include name="**/*.xml"/>
         <include name="**/*.png"/>
+        <include name="**/*.svg/"/>
       </fileset>
     </jar>
   </target>
