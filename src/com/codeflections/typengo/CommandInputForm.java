@@ -111,7 +111,7 @@ public class CommandInputForm extends JDialog {
 
         commandField.getDocument().addDocumentListener(new DocumentAdapter() {
             @Override
-            protected void textChanged(DocumentEvent documentEvent) {
+            protected void textChanged(@NotNull DocumentEvent documentEvent) {
                 handleCommand(commandField.getText());
             }
         });
@@ -247,7 +247,6 @@ public class CommandInputForm extends JDialog {
         return str.length() < size ? str + StringUtil.repeat("&nbsp;", size - str.length()) : str;
     }
 
-    @SuppressWarnings("UseJBColor")
     private Color getShortcutColor(@NotNull Color background, @NotNull Color foreground) {
         return ColorUtil.mix(background, foreground, 0.5);
     }
