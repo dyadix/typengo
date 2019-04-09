@@ -123,7 +123,10 @@ public class CommandInputForm extends JDialog {
             ActionInfo actionInfo = ActionFinder.findAction(commandString);
             AnAction action = actionInfo != null ? actionInfo.getAction() : null;
             if (action != null) {
-                if (!commandString.endsWith("+") && !commandString.endsWith("-")) {
+                if (commandString.endsWith("+") || commandString.endsWith("-")) {
+                    popupMenu.setVisible(false);
+                }
+                else {
                     popupMenu.setVisible(false);
                     CommandInputForm.this.setVisible(false);
                     CommandInputForm.this.dispose();
