@@ -31,8 +31,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class ActionInfo {
     private final @NotNull String abbreviation;
-    private @NotNull String actionId;
-
+    private final @NotNull String actionId;
 
     public ActionInfo(@NotNull String abbreviation, @NotNull String actionId) {
         this.abbreviation = abbreviation;
