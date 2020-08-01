@@ -1,5 +1,5 @@
 /*
- * Copyright (c) R.Vishniakov <dev@codeflections.com>, 2015-2016
+ * Copyright (c) R.Vishniakov <dyadix@gmail.com>, 2015-2020
  *
  * This file is part of TypeNGo Plugin.
  *
@@ -14,9 +14,8 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with TypeNGo.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package com.codeflections.typengo;
 
 import com.intellij.openapi.actionSystem.AnAction;

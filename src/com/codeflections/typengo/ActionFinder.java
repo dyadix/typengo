@@ -1,5 +1,5 @@
 /*
- * Copyright (c) R.Vishniakov <dev@codeflections.com>
+ * Copyright (c) R.Vishniakov <dyadix@gmail.com>, 2015-2020
  *
  * This file is part of TypeNGo Plugin.
  *
@@ -8,13 +8,13 @@
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * TypeNGo is distributed in the hope that it will be useful,
+ * TypeNGo Plugin is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with TypeNGo.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package com.codeflections.typengo;
