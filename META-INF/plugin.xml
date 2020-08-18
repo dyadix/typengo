@@ -21,7 +21,7 @@
   <id>codeflections.typengo</id>
   <name>TypeNGo</name>
   <version>%VERSION%</version>
-  <idea-version since-build="182.1"/>
+  <idea-version since-build="202.1"/>
   <vendor email="dev@codeflections.com" url="http://codeflections.com/typengo">Rustam V.</vendor>
   <depends>com.intellij.modules.platform</depends>
 
@@ -33,6 +33,7 @@
 
   <change-notes><![CDATA[
   <html>
+      Check the latest changes here:
       <a href="https://raw.githubusercontent.com/dyadix/typengo/master/changes.log">Change Log</a>
   </html>
       ]]>

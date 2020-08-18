@@ -18,6 +18,7 @@
  */
 package net.dyadix.typengo;
 
+import com.intellij.ide.lightEdit.LightEditCompatible;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
@@ -29,7 +30,7 @@ import java.awt.*;
 /**
  * @author dyadix
  */
-public class TypeAndGoInvokeAction extends AnAction implements DumbAware {
+public class TypeAndGoInvokeAction extends AnAction implements DumbAware, LightEditCompatible {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
