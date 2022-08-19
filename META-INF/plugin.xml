@@ -22,7 +22,7 @@
   <name>TypeNGo</name>
   <version>%VERSION%</version>
   <idea-version since-build="202.1"/>
-  <vendor email="dev@codeflections.com" url="http://www.dyadix.net">dyadix</vendor>
+  <vendor email="dyadix@gmail.com" url="http://www.dyadix.net">dyadix</vendor>
   <depends>com.intellij.modules.platform</depends>
 
   <description>
