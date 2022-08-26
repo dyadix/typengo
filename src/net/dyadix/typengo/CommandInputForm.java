@@ -58,7 +58,7 @@ public class CommandInputForm extends JDialog {
     private JTextField commandField;
     private JLabel promptField;
     private final Component sourceComponent;
-    private AnActionEvent originalEvent;
+    private final AnActionEvent originalEvent;
     private final JPopupMenu popupMenu;
     private final JFrame ideFrame;
 
@@ -255,7 +255,7 @@ public class CommandInputForm extends JDialog {
 
     private void centerOnIdeFrameOrScreen(@NotNull AnActionEvent actionEvent) {
         WindowManagerEx windowManager = WindowManagerEx.getInstanceEx();
-        IdeFrame frame = windowManager.getFrame(actionEvent.getProject());
+        IdeFrame frame = windowManager.findFrameFor(actionEvent.getProject());
         int x = 0;
         int y = 0;
         if (frame != null) {
