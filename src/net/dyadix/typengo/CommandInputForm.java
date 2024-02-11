@@ -18,10 +18,12 @@
  */
 package net.dyadix.typengo;
 
+import com.intellij.concurrency.ThreadContext;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.actionSystem.Shortcut;
+import com.intellij.openapi.application.AccessToken;
 import com.intellij.openapi.editor.colors.EditorColors;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
@@ -185,7 +187,10 @@ public class CommandInputForm extends JDialog {
         }
         currInstance = new CommandInputForm(getIdeFrame(originalEvent.getProject()), sourceComponent, originalEvent);
         currInstance.centerOnIdeFrameOrScreen(originalEvent);
-        currInstance.setVisible(true);
+        //noinspection UnstableApiUsage
+        try (AccessToken ignored = ThreadContext.resetThreadContext()) {
+            currInstance.setVisible(true);
+        }
     }
 
     static boolean isShown() {
