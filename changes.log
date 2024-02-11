@@ -1,3 +1,7 @@
+1.0.2
+
+- Fix thread context exception due to IntelliJ changes
+
 0.7
 
 - Automatically hide popup menu for repeated actions
