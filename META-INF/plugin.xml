@@ -20,9 +20,9 @@
 <idea-plugin>
   <id>codeflections.typengo</id>
   <name>TypeNGo</name>
-  <version>1.0.2</version>
-  <idea-version since-build="223.1"/>
-  <vendor email="dyadix@gmail.com" url="http://www.dyadix.net">dyadix</vendor>
+  <version>1.0.3</version>
+  <idea-version since-build="261.1"/>
+  <vendor email="dyadix@gmail.com" url="http://www.dyadix.art">dyadix.art</vendor>
   <depends>com.intellij.modules.platform</depends>
 
   <description>

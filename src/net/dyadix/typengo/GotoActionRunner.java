@@ -18,7 +18,7 @@
  */
 package net.dyadix.typengo;
 
-import com.intellij.ide.actions.GotoActionAction;
+import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
@@ -39,6 +39,6 @@ public class GotoActionRunner extends DefaultActionRunner {
     public void runAction(@NotNull Component sourceComponent, @NotNull AnActionEvent originalEvent) {
         ApplicationManager.getApplication().invokeLater(
             () -> IdeFocusManager.getGlobalInstance().doWhenFocusSettlesDown(
-                () -> GotoActionAction.performAction(action, sourceComponent, originalEvent)));
+                () -> ActionManager.getInstance().tryToExecute(action, originalEvent.getInputEvent(), sourceComponent, TYPE_N_GO_PLACE, true)));
     }
 }

@@ -1,3 +1,7 @@
+1.0.3
+
+- Get rid of deprecated GotoActionAction.performAction() for the future IDE compatibility
+
 1.0.2
 
 - Fix thread context exception due to IntelliJ changes
