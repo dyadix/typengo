@@ -1,2 +1,7 @@
 /build.properties
 /build/**
+.gradle/
+!gradle-wrapper.jar
+out/
+.junie/
+.intellijPlatform/
